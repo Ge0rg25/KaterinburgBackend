@@ -28,7 +28,7 @@ open class SecurityConfig(private val kcRoleConverter: KCRoleConverter) {
             .cors { }
             .authorizeHttpRequests { authorize ->
                 authorize
-                    .requestMatchers("/tours/create", "/tours/update", "/tours/delete").authenticated()
+                    .requestMatchers("/example/route",).authenticated()
                     .anyRequest().permitAll()
             }
             .oauth2ResourceServer { oauth2 ->
