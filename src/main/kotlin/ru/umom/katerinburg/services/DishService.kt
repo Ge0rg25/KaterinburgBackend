@@ -41,35 +41,15 @@ class DishService(val dishRepository: DishRepository, val categoryRepository: Ca
 
     fun getAll(): List<BaseDishResponse> = dishRepository.findAll().map { it.toBaseResponse() }
 
-    // TODO: refactor other methods
 
     fun getByCategory(dto: GetDishByCategoryRequest): List<BaseDishResponse> {
         val category = dto.categoryId?.let { categoryRepository.findById(it).getOrNull() } ?: throw CategoryNotExistsError()
-        val response: List<BaseDishResponse> = category.dishes?.map { it.toBaseResponse() }
-        for (dish in dishes!!) {
-            response.add(entityToBaseResponse(dish))
-        }
-        return ResponseEntity.ok<List<DishDto.Response.Dish>>(response)
+        return category.dishes?.map { it.toBaseResponse() } ?: emptyList()
     }
 
     // Comment lol
-    fun getDishById(dto: DishDto.Request.GetById): DishDto.Response.Dish {
-        val dish = dishRepository!!.findById(dto.id()).orElseThrow { DishNotExistsError() }
-        return entityToBaseResponse(dish)
+    fun getDishById(dto: GetDishByIdRequest): BaseDishResponse {
+        return dto.id?.let { dishRepository.findById(dto.id).getOrNull()?.toBaseResponse() } ?: throw DishNotExistsError()
     }
 
-    private fun entityToBaseResponse(dish: DishEntity): DishDto.Response.Dish {
-        return Dish(
-            dish.id,
-            dish.title,
-            dish.description,
-            dish.price,
-            dish.calories,
-            dish.proteins,
-            dish.fats,
-            dish.carbohydrates,
-            dish.getCategory().getId(),
-            dish.photoId
-        )
-    }
 }

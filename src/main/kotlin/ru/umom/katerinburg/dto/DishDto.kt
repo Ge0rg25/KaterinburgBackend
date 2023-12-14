@@ -46,7 +46,7 @@ data class GetDishByCategoryRequest(
     override val categoryId: String?
 ) : DishDto()
 
-data class GetDishById(
+data class GetDishByIdRequest(
     override val id: String?
 ): DishDto()
 

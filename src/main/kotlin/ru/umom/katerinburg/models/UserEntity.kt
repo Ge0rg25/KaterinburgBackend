@@ -8,27 +8,27 @@ import java.sql.Timestamp
 
 @Entity
 @Table(name = "USERS")
-class UserEntity {
+class UserEntity (
     @Id
-    var id: String? = null
+    val id: String? = null,
 
     @Column
-    var name: String? = null
+    val name: String? = null,
 
 
     @Column
-    var floor: Short = 0
+    val floor: Short? = 0,
 
     @Column
-    var workstation: Short = 0
+    val workstation: Short? = 0,
 
     @OneToMany(mappedBy = "user", orphanRemoval = true)
-    private val orders: MutableList<OrderEntity> = mutableListOf()
+    val orders: MutableList<OrderEntity>? = mutableListOf(),
 
 
     @CreationTimestamp
-    var createdAt: Timestamp? = null
+    val createdAt: Timestamp? = null,
 
     @UpdateTimestamp
-    var updatedAt: Timestamp? = null
-}
+    val updatedAt: Timestamp? = null,
+)

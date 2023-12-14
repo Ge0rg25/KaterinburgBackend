@@ -1,38 +1,46 @@
 package ru.umom.katerinburg.services
 
-import lombok.AccessLevel
 import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.stereotype.Service
+import ru.umom.katerinburg.dto.CompleteOrderRequest
+import ru.umom.katerinburg.dto.CreateOrderRequest
+import ru.umom.katerinburg.dto.UpdateOrderRequest
+import ru.umom.katerinburg.errors.common.OrderNotExistsError
+import ru.umom.katerinburg.mappers.toBaseResponse
+import ru.umom.katerinburg.mappers.toEntity
+import ru.umom.katerinburg.models.DishEntity
+import ru.umom.katerinburg.models.OrderEntity
+import ru.umom.katerinburg.models.UserEntity
+import ru.umom.katerinburg.repositories.DishRepository
+import ru.umom.katerinburg.repositories.OrderRepository
+import ru.umom.katerinburg.repositories.OrganizationRepository
+import ru.umom.katerinburg.repositories.UserRepository
+import kotlin.jvm.optionals.getOrNull
 
 @Service
-@RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-class OrderService {
-    var orderRepository: OrderRepository? = null
-    var userRepository: UserRepository? = null
-    var dishRepository: DishRepository? = null
-    var organizationRepository: OrganizationRepository? = null
+class OrderService(
+    private val orderRepository: OrderRepository,
+    private val userRepository: UserRepository,
+    private val dishRepository: DishRepository,
+    private val organizationRepository: OrganizationRepository
+) {
 
-    fun create(jwt: Jwt, dto: CreateOrderRequest): ResponseEntity<*> {
-        val user: UserEntity = userRepository.findById(jwt.subject)
-            .orElse(UserEntity.builder().id(jwt.subject).name(jwt.getClaim("name")).build())
+    fun create(jwt: Jwt, dto: CreateOrderRequest) {
+        val user: UserEntity = jwt.subject?.let { userRepository.findById(it).getOrNull() } ?: UserEntity(
+            id = jwt.subject,
+            name = jwt.getClaim("name"),
+        )
         userRepository.save(user)
-        val dishes: List<DishEntity> = dishRepository.findAllById(dto.dishesId())
 
-        val organization: OrganizationEntity =
-            organizationRepository.findById(dto.organizationId()).orElseThrow { OrganizationNotExsitsError() }
-
-        val order: OrderEntity =
-            OrderEntity.builder().delivery(dto.delivery()).user(user).dishes(dishes).organization(organization).build()
+        val order: OrderEntity = dto.toEntity(user, organizationRepository, dishRepository)
 
         orderRepository.save(order)
-        return ResponseEntity.ok().build<Any>()
     }
 
-    fun complete(dto: OrderDto.Request.Complete): ResponseEntity<*> {
-        val order: OrderEntity = orderRepository.findById(dto.id()).orElseThrow()
-        order.setCompleted(true)
-        return ResponseEntity.ok().build<Any>()
+    fun complete(dto: CompleteOrderRequest) {
+        val order: OrderEntity = dto.id?.let { orderRepository.findById(it).getOrNull() } ?: throw OrderNotExistsError()
+        order.isCompleted = true
+        orderRepository.save(order)
     }
 
     fun getAllByOrganization(dto: OrderDto.Request.GetAllByOrganization): ResponseEntity<*> {

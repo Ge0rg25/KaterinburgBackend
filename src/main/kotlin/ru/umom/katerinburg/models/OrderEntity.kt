@@ -7,27 +7,27 @@ import java.sql.Timestamp
 
 @Table(name = "ORDERS")
 @Entity
-class OrderEntity {
+class OrderEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    var id: String? = null
+    val id: String? = null,
 
     @Column
-    var delivery: Boolean = false
+    val delivery: Boolean? = false,
 
 
     @CreationTimestamp
-    var createdAt: Timestamp? = null
+    val createdAt: Timestamp? = null,
 
     @UpdateTimestamp
-    var updatedAt: Timestamp? = null
+    val updatedAt: Timestamp? = null,
 
     @Column
-    var isCompleted: Boolean = false
+    var isCompleted: Boolean? = false,
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private val user: UserEntity? = null
+    val user: UserEntity? = null,
 
     @ManyToMany
     @JoinTable(
@@ -35,9 +35,9 @@ class OrderEntity {
         joinColumns = [JoinColumn(name = "order_id")],
         inverseJoinColumns = [JoinColumn(name = "dish_id")]
     )
-    private val dishes: MutableList<DishEntity> = mutableListOf()
+    val dishes: List<DishEntity>? = listOf(),
 
     @ManyToOne
     @JoinColumn(name = "organization_id")
-    private val organization: OrganizationEntity? = null
-}
+    val organization: OrganizationEntity? = null,
+)

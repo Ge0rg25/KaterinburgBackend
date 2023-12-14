@@ -13,7 +13,7 @@ sealed class OrderDto{
     @JsonProperty("id_completed")
     open val isCompleted: Boolean? = null
     open val user: UserDto? = null
-    open val dishes: List<DishDto>? = null
+    open val dishes: List<BaseDishResponse>? = null
     @JsonProperty("organization_id")
     open val organizationId: String? = null
     @JsonProperty("created_timestamp")
@@ -24,7 +24,7 @@ data class CreateOrderRequest(
     @NotNull
     override val isDelivery: Boolean?,
     @NotEmpty
-    override val dishes: List<DishDto>?,
+    override val dishes: List<BaseDishResponse>?,
     @NotBlank
     override val organizationId: String?
 ): OrderDto()
@@ -32,7 +32,7 @@ data class CreateOrderRequest(
 
 data class CompleteOrderRequest(
     @NotBlank
-    override val id: String?
+    override val id: String?,
 ): OrderDto()
 
 
@@ -46,7 +46,7 @@ data class BaseOrderResponse(
     override val id: String?,
     override val isDelivery: Boolean?,
     override val isCompleted: Boolean?,
-    override val dishes: List<DishDto>?,
+    override val dishes: List<BaseDishResponse>?,
     override val user: UserDto?,
     override val createdTimestamp: Timestamp?
 ): OrderDto()
