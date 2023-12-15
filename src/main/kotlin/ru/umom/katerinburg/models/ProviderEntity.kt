@@ -1,0 +1,38 @@
+package ru.umom.katerinburg.models
+
+import jakarta.persistence.*
+import java.util.UUID
+
+@Entity
+@Table(name = "Providers")
+class ProviderEntity(
+
+
+    @Column
+    val title: String = "",
+
+    @Column
+    val description: String? = null,
+
+    @Column
+    val photoId: UUID? = null,
+
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    val organization: OrganizationEntity? = null
+
+) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    val id: UUID = UUID.randomUUID()
+
+    @OneToMany(mappedBy = "provider")
+    val dishes: MutableList<DishEntity> = mutableListOf()
+
+    @OneToMany(mappedBy = "provider")
+    val menus : MutableList<MenuEntity> = mutableListOf()
+
+    @OneToMany(mappedBy = "provider")
+    val categories : MutableList<CategoryEntity> = mutableListOf()
+
+}
