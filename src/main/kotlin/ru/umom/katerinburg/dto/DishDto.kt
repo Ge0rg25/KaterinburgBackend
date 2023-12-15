@@ -1,8 +1,6 @@
 package ru.umom.katerinburg.dto
 
-
-
-
+import java.util.*
 
 
 data class CreateDishRq(
@@ -10,36 +8,39 @@ data class CreateDishRq(
     val description: String?,
     val cookingTime: Int,
     val price: Double,
-    val photoId: String,
+    val photoId: UUID?,
     val calories: Double,
     val proteins: Double,
     val fats: Double,
     val carbohydrates: Double,
+    val providerId: UUID
 )
 
 data class UpdateDishRq(
-    val id: String,
+    val id: UUID,
     val title: String,
     val description: String?,
     val cookingTime: Int,
     val price: Double,
-    val photoId: String,
+    val photoId: UUID?,
     val calories: Double,
     val proteins: Double,
     val fats: Double,
     val carbohydrates: Double,
+    val providerId: UUID
 )
 
 
 data class DishDtoRs(
-    val id: String,
+    val id: UUID,
     val title: String,
     val description: String?,
     val cookingTime: Int,
     val price: Double,
-    val photoId: String,
+    val photoId: UUID?,
     val calories: Double,
     val proteins: Double,
     val fats: Double,
-    val carbohydrates: Double
+    val carbohydrates: Double,
+    val providerId: UUID
 )

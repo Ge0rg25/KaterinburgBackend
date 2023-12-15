@@ -9,15 +9,36 @@ import java.util.UUID
 @Table(name = "Dishes")
 class DishEntity(
 
-    val title: String = "",
-    val description: String? = null,
-    val photoId: UUID? = null,
-    val calories: Double = 0.0,
-    val proteins: Double = 0.0,
-    val fats: Double = 0.0,
-    val carbohydrates: Double = 0.0,
-    val price: Double = 0.0,
-    val cookingTime: LocalTime = LocalTime.of(0, 20),
+    @Column
+    var title: String = "",
+
+    @Column
+    var description: String? = null,
+
+    @Column
+    var photoId: UUID? = null,
+
+    @Column
+    var calories: Double = 0.0,
+
+    @Column
+    var proteins: Double = 0.0,
+
+    @Column
+    var fats: Double = 0.0,
+
+    @Column
+    var carbohydrates: Double = 0.0,
+
+    @Column
+    var price: Double = 0.0,
+
+    @Column
+    var cookingTime: LocalTime = LocalTime.of(0, 20),
+
+    @ManyToOne
+    @JoinColumn(name = "provider_id")
+    val provider: ProviderEntity? = null
 
 ) {
 
@@ -32,8 +53,6 @@ class DishEntity(
     @ManyToMany(mappedBy = "dishes")
     val menus: MutableList<MenuEntity> = mutableListOf()
 
-    @ManyToOne
-    @JoinColumn(name = "provider_id")
-    val provider: ProviderEntity? = null
+
 
 }
