@@ -7,13 +7,18 @@ import java.util.UUID
 @Table(name = "Menus")
 class MenuEntity(
     @Column
-    val title: String = "",
+    var title: String = "",
 
     @Column
-    val description: String? = null,
+    var description: String? = null,
 
     @Column
-    val photoId: UUID? = null
+    var photoId: UUID? = null,
+
+    @ManyToOne
+    @JoinColumn(name = "provider_id")
+    val provider: ProviderEntity? = null
+
 
 ) {
 
@@ -21,9 +26,7 @@ class MenuEntity(
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID = UUID.randomUUID()
 
-    @ManyToOne
-    @JoinColumn(name = "provider_id")
-    val provider: ProviderEntity? = null
+
 
     @ManyToMany
     @JoinTable(

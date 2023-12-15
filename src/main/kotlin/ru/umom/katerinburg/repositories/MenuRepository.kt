@@ -6,4 +6,7 @@ import ru.umom.katerinburg.models.MenuEntity
 import java.util.UUID
 
 @Repository
-interface MenuRepository : JpaRepository<MenuEntity, UUID>
+interface MenuRepository : JpaRepository<MenuEntity, UUID>{
+
+    fun findAllByProviderId(providerId: UUID): List<MenuEntity>
+}
