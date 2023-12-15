@@ -13,13 +13,9 @@ class OrderEntity(
     @Column
     val lockerNumber: Short? = null,
 
-) {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    val id: UUID = UUID.randomUUID()
-
-    val isCompleted: Boolean = false
+    @Column
+    val userId: UUID? = null,
 
     @ManyToMany
     @JoinTable(
@@ -27,6 +23,20 @@ class OrderEntity(
         joinColumns = [JoinColumn(name = "order_id")],
         inverseJoinColumns = [JoinColumn(name = "dish_id")]
     )
-    val dises: MutableList<DishEntity> = mutableListOf()
+    val dises: MutableList<DishEntity> = mutableListOf(),
+
+
+    @ManyToOne
+@JoinColumn(name = "provider_id")
+val provider: ProviderEntity? = null
+) {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    val id: UUID = UUID.randomUUID()
+
+    var isCompleted: Boolean = false
+
+
 
 }

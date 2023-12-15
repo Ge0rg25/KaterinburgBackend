@@ -1,4 +1,4 @@
-package ru.umom.katerinburg.services
+package ru.umom.katerinburg.services.interfaces
 
 import org.springframework.stereotype.Service
 import ru.umom.katerinburg.dto.CategoryDtoRs
@@ -6,7 +6,7 @@ import ru.umom.katerinburg.dto.CreateCategoryRq
 import ru.umom.katerinburg.dto.UpdateCategoryRq
 import java.util.*
 
-@Service
+
 interface CategoryService {
 
     fun create(dto: CreateCategoryRq)

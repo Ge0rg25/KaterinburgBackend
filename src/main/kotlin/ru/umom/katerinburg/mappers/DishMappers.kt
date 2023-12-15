@@ -20,6 +20,19 @@ fun CreateDishRq.toEntity(providerRepository: ProviderRepository): DishEntity = 
 )
 
 
+fun DishDtoRs.toEntity(providerRepository: ProviderRepository): DishEntity = DishEntity(
+    title = title,
+    description = description,
+    photoId = photoId,
+    cookingTime = LocalTime.of(0, cookingTime),
+    price = price,
+    calories = calories,
+    proteins = proteins,
+    fats = fats,
+    carbohydrates = carbohydrates,
+    provider = providerRepository.getReferenceById(providerId)
+)
+
 
 fun DishEntity.toDto() = DishDtoRs(
     id = id,

@@ -1,5 +1,6 @@
-package ru.umom.katerinburg.services
+package ru.umom.katerinburg.services.impl
 
+import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.umom.katerinburg.dto.CategoryDtoRs
 import ru.umom.katerinburg.dto.CreateDishRq
@@ -9,10 +10,11 @@ import ru.umom.katerinburg.mappers.toDto
 import ru.umom.katerinburg.mappers.toEntity
 import ru.umom.katerinburg.repositories.DishRepository
 import ru.umom.katerinburg.repositories.ProviderRepository
+import ru.umom.katerinburg.services.interfaces.DishService
 import java.time.LocalTime
 import java.util.UUID
 
-
+@Service
 class IDishService(private val dishRepository: DishRepository, private val providerRepository: ProviderRepository) :
     DishService {
 

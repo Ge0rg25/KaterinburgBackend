@@ -1,5 +1,6 @@
-package ru.umom.katerinburg.services
+package ru.umom.katerinburg.services.impl
 
+import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.umom.katerinburg.dto.CreateOrganizationRq
 import ru.umom.katerinburg.dto.OrganizationDtoRs
@@ -8,8 +9,10 @@ import ru.umom.katerinburg.mappers.toDto
 import ru.umom.katerinburg.mappers.toEntity
 import ru.umom.katerinburg.models.OrganizationEntity
 import ru.umom.katerinburg.repositories.OrganizationRepository
+import ru.umom.katerinburg.services.interfaces.OrganizationService
 import java.util.*
 
+@Service
 class IOrganizationService(private val organizationRepository: OrganizationRepository) : OrganizationService {
 
     @Transactional

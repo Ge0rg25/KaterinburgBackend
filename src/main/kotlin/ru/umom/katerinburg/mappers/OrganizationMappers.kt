@@ -10,7 +10,8 @@ fun CreateOrganizationRq.toEntity(): OrganizationEntity {
     return OrganizationEntity(
         title = title,
         description = description,
-        address = address
+        address = address,
+        photoId = photoId
     )
 }
 

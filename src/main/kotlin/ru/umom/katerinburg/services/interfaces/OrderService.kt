@@ -1,21 +1,20 @@
-package ru.umom.katerinburg.services
+package ru.umom.katerinburg.services.interfaces
 
 import org.springframework.security.oauth2.jwt.Jwt
-import org.springframework.stereotype.Service
 import ru.umom.katerinburg.dto.CreateOrderRq
 import ru.umom.katerinburg.dto.OrderDtoRs
+import java.util.UUID
 
-@Service
 interface OrderService {
 
     fun create(dto: CreateOrderRq, jwt: Jwt)
 
-    fun complete(id: String)
+    fun complete(id: UUID)
 
     fun getUserOrders(jwt: Jwt): List<OrderDtoRs>
 
 
-    fun getAllOrdersByProvider(providerId: String): List<OrderDtoRs>
+    fun getAllOrdersByProvider(providerId: UUID): List<OrderDtoRs>
 
 
 

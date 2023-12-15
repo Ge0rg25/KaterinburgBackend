@@ -6,7 +6,7 @@ import java.util.*
 data class CreateOrganizationRq(
     val title: String,
     val description: String?,
-    val photoId: UUID,
+    val photoId: UUID?,
     val address: String
 )
 

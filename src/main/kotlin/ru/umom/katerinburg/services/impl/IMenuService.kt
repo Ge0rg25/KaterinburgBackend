@@ -1,5 +1,6 @@
-package ru.umom.katerinburg.services
+package ru.umom.katerinburg.services.impl
 
+import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.umom.katerinburg.dto.CreateMenuRq
 import ru.umom.katerinburg.dto.MenuDtoRs
@@ -8,9 +9,12 @@ import ru.umom.katerinburg.mappers.toDto
 import ru.umom.katerinburg.mappers.toEntity
 import ru.umom.katerinburg.repositories.MenuRepository
 import ru.umom.katerinburg.repositories.ProviderRepository
+import ru.umom.katerinburg.services.interfaces.MenuService
 import java.util.*
 
-class IMenuService(private val menuRepository: MenuRepository, private val providerRepository: ProviderRepository) : MenuService {
+@Service
+class IMenuService(private val menuRepository: MenuRepository, private val providerRepository: ProviderRepository) :
+    MenuService {
 
     @Transactional
     override fun create(dto: CreateMenuRq) {

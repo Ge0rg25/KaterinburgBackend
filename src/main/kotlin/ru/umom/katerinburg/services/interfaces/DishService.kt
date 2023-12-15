@@ -1,4 +1,4 @@
-package ru.umom.katerinburg.services
+package ru.umom.katerinburg.services.interfaces
 
 import org.springframework.stereotype.Service
 import ru.umom.katerinburg.dto.CategoryDtoRs
@@ -7,7 +7,6 @@ import ru.umom.katerinburg.dto.DishDtoRs
 import ru.umom.katerinburg.dto.UpdateDishRq
 import java.util.UUID
 
-@Service
 interface DishService {
 
     fun create(dto: CreateDishRq)

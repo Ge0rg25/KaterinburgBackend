@@ -1,4 +1,4 @@
-package ru.umom.katerinburg.services
+package ru.umom.katerinburg.services.interfaces
 
 import org.springframework.stereotype.Service
 import ru.umom.katerinburg.dto.CreateProviderRq
@@ -6,7 +6,6 @@ import ru.umom.katerinburg.dto.ProviderDtoRs
 import ru.umom.katerinburg.dto.UpdateProviderRq
 import java.util.*
 
-@Service
 interface ProviderService {
 
     fun create(dto: CreateProviderRq)
@@ -15,7 +14,7 @@ interface ProviderService {
 
     fun delete(id: UUID)
 
-    fun get(id: UUID): ProviderDtoRs
+
 
     fun getAllByOrganizationId(organizationId: UUID): List<ProviderDtoRs>
 

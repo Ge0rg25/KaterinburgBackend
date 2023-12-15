@@ -35,4 +35,6 @@ class ProviderEntity(
     @OneToMany(mappedBy = "provider")
     val categories : MutableList<CategoryEntity> = mutableListOf()
 
+    @OneToMany(mappedBy = "provider")
+    val orders : MutableList<OrderEntity> = mutableListOf()
 }
