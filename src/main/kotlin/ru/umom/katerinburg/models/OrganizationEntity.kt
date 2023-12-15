@@ -9,15 +9,15 @@ class OrganizationEntity(
 
 
     @Column
-    var title: String = "",
+    var title: String,
 
     @Column
     var description: String? = null,
 
     @Column
-    var address: String = "",
+    var address: String,
 
-    var photoId: UUID? = null
+    var photoId: UUID?
 
 ) {
     @Id
@@ -26,4 +26,6 @@ class OrganizationEntity(
 
     @OneToMany(mappedBy = "organization")
     val providers: MutableList<ProviderEntity> = mutableListOf()
+
+    constructor() : this(title = "", description = null, address = "", photoId = null)
 }

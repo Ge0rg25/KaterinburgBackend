@@ -13,7 +13,7 @@ import ru.umom.katerinburg.services.interfaces.OrderService
 import java.util.UUID
 
 @Service
-class IOrderService(
+class OrderServiceImpl(
     private val orderRepository: OrderRepository,
     private val dishRepository: DishRepository
 ): OrderService {

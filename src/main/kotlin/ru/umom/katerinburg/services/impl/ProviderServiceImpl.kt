@@ -13,7 +13,7 @@ import ru.umom.katerinburg.services.interfaces.ProviderService
 import java.util.*
 
 @Service
-class IProviderService(
+class ProviderServiceImpl(
     private val providerRepository: ProviderRepository,
     private val organizationRepository: OrganizationRepository
 ) : ProviderService {

@@ -1,5 +1,6 @@
 package ru.umom.katerinburg.services.impl
 
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.umom.katerinburg.dto.CategoryDtoRs
@@ -13,7 +14,7 @@ import ru.umom.katerinburg.services.interfaces.CategoryService
 import java.util.UUID
 
 @Service
-class ICategoryService(
+class CategoryServiceImpl(
     private val categoryRepository: CategoryRepository,
     private val providerRepository: ProviderRepository
 ) : CategoryService {
@@ -26,10 +27,11 @@ class ICategoryService(
 
     @Transactional
     override fun update(dto: UpdateCategoryRq) {
-        val category = categoryRepository.findById(dto.id).orElseThrow()
-        category.title = dto.title
-        category.description = dto.description
-        category.photoId = dto.photoId
+        categoryRepository.findByIdOrNull(dto.id)?.apply {
+            title = dto.title
+            description = dto.description
+            photoId = dto.photoId
+        } ?: throw RuntimeException() // todo
     }
 
     @Transactional
@@ -39,7 +41,7 @@ class ICategoryService(
     }
 
 
-    override fun getAllByProviderId(providerId: UUID): List<CategoryDtoRs> = categoryRepository.findAllByProviderId(providerId).map { it.toDto() }
+    override fun getAllByProviderId(providerId: UUID): List<CategoryDtoRs> = categoryRepository.findAllByProviderId(providerId).toDto()
 
 
 }

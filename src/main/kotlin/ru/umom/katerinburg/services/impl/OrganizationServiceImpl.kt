@@ -13,7 +13,7 @@ import ru.umom.katerinburg.services.interfaces.OrganizationService
 import java.util.*
 
 @Service
-class IOrganizationService(private val organizationRepository: OrganizationRepository) : OrganizationService {
+class OrganizationServiceImpl(private val organizationRepository: OrganizationRepository) : OrganizationService {
 
     @Transactional
     override fun create(dto: CreateOrganizationRq) {

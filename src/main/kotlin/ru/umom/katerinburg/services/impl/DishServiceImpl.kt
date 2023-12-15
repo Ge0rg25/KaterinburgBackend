@@ -15,7 +15,7 @@ import java.time.LocalTime
 import java.util.UUID
 
 @Service
-class IDishService(private val dishRepository: DishRepository, private val providerRepository: ProviderRepository) :
+class DishServiceImpl(private val dishRepository: DishRepository, private val providerRepository: ProviderRepository) :
     DishService {
 
     @Transactional

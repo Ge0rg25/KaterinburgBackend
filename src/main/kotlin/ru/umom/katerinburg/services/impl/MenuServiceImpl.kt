@@ -13,7 +13,7 @@ import ru.umom.katerinburg.services.interfaces.MenuService
 import java.util.*
 
 @Service
-class IMenuService(private val menuRepository: MenuRepository, private val providerRepository: ProviderRepository) :
+class MenuServiceImpl(private val menuRepository: MenuRepository, private val providerRepository: ProviderRepository) :
     MenuService {
 
     @Transactional

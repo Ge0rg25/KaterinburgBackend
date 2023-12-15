@@ -21,3 +21,5 @@ fun CategoryEntity.toDto() = CategoryDtoRs(
     photoId = photoId,
     providerId = provider!!.id
 )
+
+fun Iterable<CategoryEntity>.toDto() = this.map { it.toDto() }

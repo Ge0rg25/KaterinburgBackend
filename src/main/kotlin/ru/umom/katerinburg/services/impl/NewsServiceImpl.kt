@@ -11,7 +11,7 @@ import ru.umom.katerinburg.repositories.ProviderRepository
 import ru.umom.katerinburg.services.interfaces.NewsService
 
 @Service
-class INewsService (private val newsRepository: NewsRepository, private val providerRepository: ProviderRepository): NewsService{
+class NewsServiceImpl (private val newsRepository: NewsRepository, private val providerRepository: ProviderRepository): NewsService{
 
     @Transactional
     override fun create(dto: CreateNewsRq) {
