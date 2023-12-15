@@ -45,6 +45,10 @@ class IDishService(private val dishRepository: DishRepository, private val provi
         dishRepository.delete(dish)
     }
 
+    override fun getAllByCategoryId(categoryId: UUID): List<DishDtoRs> = dishRepository
+        .findAllByCategoriesId(categoryId)
+        .map { it.toDto() }
+
 
     override fun getAllByProviderId(providerId: UUID): List<DishDtoRs> = dishRepository
         .findAllByProviderId(providerId)

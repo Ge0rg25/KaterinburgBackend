@@ -10,4 +10,6 @@ interface DishRepository: JpaRepository<DishEntity, UUID>{
     fun findAllByProviderId(providerId: UUID): List<DishEntity>
 
     fun findAllByMenusId(menuId: UUID): List<DishEntity>
+
+    fun findAllByCategoriesId(categoryId: UUID): List<DishEntity>
 }

@@ -15,6 +15,7 @@ interface DishService {
 
     fun delete(id: UUID)
 
+    fun getAllByCategoryId(categoryId: UUID): List<DishDtoRs>
 
     fun getAllByProviderId(providerId: UUID): List<DishDtoRs>
 

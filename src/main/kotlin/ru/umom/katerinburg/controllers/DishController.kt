@@ -37,4 +37,7 @@ class DishController (private val dishService: DishService){
     @GetMapping("/categories")
     fun getDishCategories(@RequestParam id: UUID) = dishService.getDishCategories(id)
 
+    @GetMapping("/by/category")
+    fun getAllByCategoryId(categoryId: UUID) = dishService.getAllByCategoryId(categoryId)
+
 }
