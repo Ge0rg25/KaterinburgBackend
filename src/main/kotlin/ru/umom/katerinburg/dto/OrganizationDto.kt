@@ -11,7 +11,7 @@ data class CreateOrganizationRq(
 )
 
 data class UpdateOrganizationRq(
-    val id: String,
+    val id: UUID,
     val title: String,
     val description: String?,
     val photoId: UUID,
@@ -20,12 +20,13 @@ data class UpdateOrganizationRq(
 
 
 data class OrganizationDtoRs(
-    val id: String,
+    val id: UUID,
     val title: String,
     val description: String?,
-    val photoId: UUID,
+    val photoId: UUID?,
     val address: String
 )
+
 
 
 

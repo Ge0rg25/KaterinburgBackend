@@ -9,15 +9,15 @@ class OrganizationEntity(
 
 
     @Column
-    val title: String = "",
+    var title: String = "",
 
     @Column
-    val description: String? = null,
+    var description: String? = null,
 
     @Column
-    val address: String = "",
+    var address: String = "",
 
-    val photoId: UUID? = null
+    var photoId: UUID? = null
 
 ) {
     @Id

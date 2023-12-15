@@ -4,18 +4,19 @@ import org.springframework.stereotype.Service
 import ru.umom.katerinburg.dto.CreateProviderRq
 import ru.umom.katerinburg.dto.ProviderDtoRs
 import ru.umom.katerinburg.dto.UpdateProviderRq
+import java.util.*
 
 @Service
-interface ProviderRequest {
+interface ProviderService {
 
     fun create(dto: CreateProviderRq)
 
     fun update(dto: UpdateProviderRq)
 
-    fun delete(id: String)
+    fun delete(id: UUID)
 
-    fun get(id: String)
+    fun get(id: UUID): ProviderDtoRs
 
-    fun getAllByOrganizationId(organizationId: String): List<ProviderDtoRs>
+    fun getAllByOrganizationId(organizationId: UUID): List<ProviderDtoRs>
 
 }

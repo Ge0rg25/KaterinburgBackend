@@ -6,4 +6,8 @@ import ru.umom.katerinburg.models.ProviderEntity
 import java.util.*
 
 @Repository
-interface ProviderRepository : JpaRepository<ProviderEntity, UUID>
+interface ProviderRepository : JpaRepository<ProviderEntity, UUID>{
+
+    fun findAllByOrganizationId(organizationId: UUID): List<ProviderEntity>
+
+}

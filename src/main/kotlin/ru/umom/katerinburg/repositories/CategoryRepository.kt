@@ -6,4 +6,7 @@ import ru.umom.katerinburg.models.CategoryEntity
 import java.util.UUID
 
 @Repository
-interface CategoryRepository : JpaRepository<CategoryEntity, UUID>
+interface CategoryRepository : JpaRepository<CategoryEntity, UUID>{
+
+    fun findAllByProviderId(providerId: UUID): List<CategoryEntity>
+}

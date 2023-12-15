@@ -7,13 +7,13 @@ import java.util.UUID
 @Table(name = "Categories")
 class CategoryEntity(
     @Column
-    val title: String = "",
+    var title: String = "",
 
     @Column
-    val description: String? = null,
+    var description: String? = null,
 
     @Column
-    val photoId: UUID? = null,
+    var photoId: UUID? = null,
 
 
     ) {

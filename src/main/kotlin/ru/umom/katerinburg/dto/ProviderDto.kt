@@ -1,30 +1,30 @@
 package ru.umom.katerinburg.dto
 
-
+import java.util.*
 
 
 data class CreateProviderRq(
     val title: String,
     val description: String?,
-    val photoId: String,
-    val organizationId: String
+    val photoId: UUID?,
+    val organizationId: UUID
 )
 
 data class UpdateProviderRq(
-    val id: String,
+    val id: UUID,
     val title: String,
     val description: String?,
-    val photoId: String,
+    val photoId: UUID?,
     val organizationId: String
 )
 
 
 
 data class ProviderDtoRs(
-    val id: String,
+    val id: UUID,
     val title: String,
     val description: String?,
-    val photoId: String,
-    val organizationId: String
+    val photoId: UUID?,
+    val organizationId: UUID
 )
 
