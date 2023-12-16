@@ -7,7 +7,7 @@ data class CreateCategoryRq(
     val title: String,
     val description: String?,
     val photoId: UUID?,
-    val providerId: String
+    val providerId: UUID
 )
 
 data class UpdateCategoryRq(

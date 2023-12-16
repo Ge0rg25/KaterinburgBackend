@@ -15,6 +15,9 @@ class CategoryEntity(
     @Column
     var photoId: UUID? = null,
 
+    @ManyToOne
+    @JoinColumn(name = "provider_id")
+    val provider: ProviderEntity?,
 
     ) {
 
@@ -22,9 +25,7 @@ class CategoryEntity(
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID = UUID.randomUUID()
 
-    @ManyToOne
-    @JoinColumn(name = "provider_id")
-    val provider: ProviderEntity? = null
+
 
     @ManyToMany
     @JoinTable(
@@ -34,5 +35,5 @@ class CategoryEntity(
     )
     val dishes: MutableList<DishEntity> = mutableListOf()
 
-    constructor() : this(title="")
+    constructor() : this(title="", provider=null)
 }
