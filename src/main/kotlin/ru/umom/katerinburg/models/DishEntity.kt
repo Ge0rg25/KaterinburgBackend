@@ -10,7 +10,7 @@ import java.util.UUID
 class DishEntity(
 
     @Column
-    var title: String = "",
+    var title: String,
 
     @Column
     var description: String? = null,
@@ -19,19 +19,19 @@ class DishEntity(
     var photoId: UUID? = null,
 
     @Column
-    var calories: Double = 0.0,
+    var calories: Double,
 
     @Column
-    var proteins: Double = 0.0,
+    var proteins: Double,
 
     @Column
-    var fats: Double = 0.0,
+    var fats: Double,
 
     @Column
-    var carbohydrates: Double = 0.0,
+    var carbohydrates: Double,
 
     @Column
-    var price: Double = 0.0,
+    var price: Double,
 
     @Column
     var cookingTime: LocalTime = LocalTime.of(0, 20),
@@ -53,6 +53,6 @@ class DishEntity(
     @ManyToMany(mappedBy = "dishes")
     val menus: MutableList<MenuEntity> = mutableListOf()
 
-
+    constructor(): this(title="", calories = 0.0, proteins = 0.0, fats = 0.0, carbohydrates = 0.0, price = 0.0)
 
 }

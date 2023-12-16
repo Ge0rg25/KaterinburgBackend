@@ -9,10 +9,10 @@ import java.util.UUID
 class NewsEntity(
 
     @Column
-    val title: String = "",
+    val title: String,
 
     @Column
-    val body: String? = null,
+    val body: String,
 
     @Column
     val photoId: UUID? = null
@@ -21,4 +21,6 @@ class NewsEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID = UUID.randomUUID()
+
+    constructor(): this(title="", body="")
 }

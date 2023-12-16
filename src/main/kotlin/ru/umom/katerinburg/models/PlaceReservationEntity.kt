@@ -8,9 +8,11 @@ import java.util.*
 @Table(name = "Reservations")
 class PlaceReservationEntity(
     @Column
-    val number: Int = 0
+    val number: Int,
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID = UUID.randomUUID()
+
+    constructor() : this(number = 0)
 }

@@ -7,7 +7,7 @@ import java.util.UUID
 @Table(name = "Categories")
 class CategoryEntity(
     @Column
-    var title: String = "",
+    var title: String,
 
     @Column
     var description: String? = null,
@@ -34,4 +34,5 @@ class CategoryEntity(
     )
     val dishes: MutableList<DishEntity> = mutableListOf()
 
+    constructor() : this(title="")
 }

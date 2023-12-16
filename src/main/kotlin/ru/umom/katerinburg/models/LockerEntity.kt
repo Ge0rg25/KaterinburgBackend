@@ -6,7 +6,7 @@ import java.util.*
 @Table(name = "Lockers")
 @Entity
 class LockerEntity(
-    val lockerNumber: Short = 0
+    val lockerNumber: Short
 ) {
 
     @Id
@@ -14,4 +14,6 @@ class LockerEntity(
     val id: UUID = UUID.randomUUID()
 
     val isLocked: Boolean = false
+
+    constructor(): this(lockerNumber=0)
 }

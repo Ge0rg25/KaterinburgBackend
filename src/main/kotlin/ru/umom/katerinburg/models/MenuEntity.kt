@@ -7,7 +7,7 @@ import java.util.UUID
 @Table(name = "Menus")
 class MenuEntity(
     @Column
-    var title: String = "",
+    var title: String,
 
     @Column
     var description: String? = null,
@@ -17,7 +17,7 @@ class MenuEntity(
 
     @ManyToOne
     @JoinColumn(name = "provider_id")
-    val provider: ProviderEntity? = null
+    val provider: ProviderEntity?
 
 
 ) {
@@ -35,4 +35,6 @@ class MenuEntity(
         inverseJoinColumns = [JoinColumn(name = "dish_id")]
     )
     val dishes: MutableList<DishEntity> = mutableListOf()
+
+    constructor(): this(title="", provider = null)
 }

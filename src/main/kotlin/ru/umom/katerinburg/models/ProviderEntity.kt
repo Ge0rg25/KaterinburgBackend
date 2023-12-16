@@ -9,17 +9,17 @@ class ProviderEntity(
 
 
     @Column
-    var title: String = "",
+    var title: String,
 
     @Column
-    var description: String? = null,
+    var description: String?,
 
     @Column
-    var photoId: UUID? = null,
+    var photoId: UUID?,
 
     @ManyToOne
     @JoinColumn(name = "organization_id")
-    val organization: OrganizationEntity? = null
+    val organization: OrganizationEntity?
 
 ) {
     @Id
@@ -37,4 +37,8 @@ class ProviderEntity(
 
     @OneToMany(mappedBy = "provider")
     val orders : MutableList<OrderEntity> = mutableListOf()
+
+
+
+    constructor(): this(title="", description=null, photoId=null, organization=null)
 }
