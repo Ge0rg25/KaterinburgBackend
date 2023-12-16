@@ -15,10 +15,10 @@ import ru.umom.katerinburg.utils.KCRoleConverter
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-open class SecurityConfig(private val kcRoleConverter: KCRoleConverter) {
+class SecurityConfig(private val kcRoleConverter: KCRoleConverter) {
 
     @Bean
-    open fun filterChain(http: HttpSecurity): SecurityFilterChain {
+    fun filterChain(http: HttpSecurity): SecurityFilterChain {
         val jwtAuthenticationConverter = JwtAuthenticationConverter().apply {
             setJwtGrantedAuthoritiesConverter(kcRoleConverter)
         }
@@ -28,7 +28,7 @@ open class SecurityConfig(private val kcRoleConverter: KCRoleConverter) {
             .cors { }
             .authorizeHttpRequests { authorize ->
                 authorize
-                    .requestMatchers("/example/route",).authenticated()
+                    .requestMatchers("/example/route").authenticated()
                     .anyRequest().permitAll()
             }
             .oauth2ResourceServer { oauth2 ->
@@ -40,7 +40,7 @@ open class SecurityConfig(private val kcRoleConverter: KCRoleConverter) {
     }
 
     @Bean
-    open fun corsConfigurationSource(): CorsConfigurationSource {
+    fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration().apply {
             allowedHeaders = listOf("*")
             allowedOriginPatterns = listOf("*")

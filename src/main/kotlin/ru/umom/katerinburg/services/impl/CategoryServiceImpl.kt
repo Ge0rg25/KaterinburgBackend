@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional
 import ru.umom.katerinburg.dto.CategoryDtoRs
 import ru.umom.katerinburg.dto.CreateCategoryRq
 import ru.umom.katerinburg.dto.UpdateCategoryRq
+import ru.umom.katerinburg.errors.common.CategoryNotExistsError
 import ru.umom.katerinburg.mappers.toDto
 import ru.umom.katerinburg.mappers.toEntity
 import ru.umom.katerinburg.repositories.CategoryRepository
@@ -21,8 +22,9 @@ class CategoryServiceImpl(
 
     @Transactional
     override fun create(dto: CreateCategoryRq) {
-       val category = dto.toEntity(providerRepository)
-        categoryRepository.save(category)
+        categoryRepository.save(
+            dto.toEntity(providerRepository)
+        )
     }
 
     @Transactional
@@ -31,17 +33,19 @@ class CategoryServiceImpl(
             title = dto.title
             description = dto.description
             photoId = dto.photoId
-        } ?: throw RuntimeException() // todo
+        } ?: throw CategoryNotExistsError()
     }
 
     @Transactional
     override fun delete(id: UUID) {
-        val category = categoryRepository.findById(id).orElseThrow()
-        categoryRepository.delete(category)
+        categoryRepository.findByIdOrNull(id)?.let {
+            categoryRepository.delete(it)
+        } ?: throw CategoryNotExistsError()
     }
 
 
-    override fun getAllByProviderId(providerId: UUID): List<CategoryDtoRs> = categoryRepository.findAllByProviderId(providerId).toDto()
+    override fun getAllByProviderId(providerId: UUID): List<CategoryDtoRs> =
+        categoryRepository.findAllByProviderId(providerId).toDto()
 
 
 }

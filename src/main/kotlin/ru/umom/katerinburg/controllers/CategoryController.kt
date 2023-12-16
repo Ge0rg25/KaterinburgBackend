@@ -4,7 +4,6 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import ru.umom.katerinburg.dto.CreateCategoryRq
 import ru.umom.katerinburg.dto.UpdateCategoryRq
-import ru.umom.katerinburg.repositories.CategoryRepository
 import ru.umom.katerinburg.services.interfaces.CategoryService
 import java.util.*
 

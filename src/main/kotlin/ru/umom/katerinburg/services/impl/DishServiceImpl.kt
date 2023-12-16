@@ -1,11 +1,13 @@
 package ru.umom.katerinburg.services.impl
 
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.umom.katerinburg.dto.CategoryDtoRs
 import ru.umom.katerinburg.dto.CreateDishRq
 import ru.umom.katerinburg.dto.DishDtoRs
 import ru.umom.katerinburg.dto.UpdateDishRq
+import ru.umom.katerinburg.errors.common.DishNotExistsError
 import ru.umom.katerinburg.mappers.toDto
 import ru.umom.katerinburg.mappers.toEntity
 import ru.umom.katerinburg.repositories.DishRepository
@@ -20,29 +22,31 @@ class DishServiceImpl(private val dishRepository: DishRepository, private val pr
 
     @Transactional
     override fun create(dto: CreateDishRq) {
-        val dish = dto.toEntity(providerRepository)
-        dishRepository.save(dish)
+        dishRepository.save(
+            dto.toEntity(providerRepository)
+        )
     }
 
 
     @Transactional
     override fun update(dto: UpdateDishRq) {
-        val dish = dishRepository.findById(dto.id).orElseThrow()
-        dish.title = dto.title
-        dish.description = dto.description
-        dish.photoId = dto.photoId
-        dish.price = dto.price
-        dish.calories = dto.calories
-        dish.proteins = dto.proteins
-        dish.fats = dto.fats
-        dish.carbohydrates = dto.carbohydrates
-        dish.cookingTime = LocalTime.of(0, dto.cookingTime)
-
+        dishRepository.findByIdOrNull(dto.id)?.apply {
+            title = dto.title
+            description = dto.description
+            photoId = dto.photoId
+            price = dto.price
+            calories = dto.calories
+            proteins = dto.proteins
+            fats = dto.fats
+            carbohydrates = dto.carbohydrates
+            cookingTime = LocalTime.of(0, dto.cookingTime)
+        }?: throw DishNotExistsError()
     }
 
     override fun delete(id: UUID) {
-        val dish = dishRepository.findById(id).orElseThrow()
-        dishRepository.delete(dish)
+        dishRepository.findByIdOrNull(id)?.let {
+            dishRepository.delete(it)
+        } ?: throw DishNotExistsError()
     }
 
     override fun getAllByCategoryId(categoryId: UUID): List<DishDtoRs> = dishRepository
@@ -58,5 +62,5 @@ class DishServiceImpl(private val dishRepository: DishRepository, private val pr
         .findAllByMenusId(menuId)
         .map { it.toDto() }
 
-    override fun getDishCategories(id: UUID): List<CategoryDtoRs> = dishRepository.findById(id).orElseThrow().categories.map { it.toDto() }
+    override fun getDishCategories(id: UUID): List<CategoryDtoRs> = dishRepository.findByIdOrNull(id)?.categories?.map { it.toDto() } ?: emptyList()
 }

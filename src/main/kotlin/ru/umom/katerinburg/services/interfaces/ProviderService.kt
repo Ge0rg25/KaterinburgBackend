@@ -1,6 +1,5 @@
 package ru.umom.katerinburg.services.interfaces
 
-import org.springframework.stereotype.Service
 import ru.umom.katerinburg.dto.CreateProviderRq
 import ru.umom.katerinburg.dto.ProviderDtoRs
 import ru.umom.katerinburg.dto.UpdateProviderRq

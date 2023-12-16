@@ -1,11 +1,10 @@
 package ru.umom.katerinburg.services.interfaces
 
-import org.springframework.stereotype.Service
 import ru.umom.katerinburg.dto.CategoryDtoRs
 import ru.umom.katerinburg.dto.CreateDishRq
 import ru.umom.katerinburg.dto.DishDtoRs
 import ru.umom.katerinburg.dto.UpdateDishRq
-import java.util.UUID
+import java.util.*
 
 interface DishService {
 
