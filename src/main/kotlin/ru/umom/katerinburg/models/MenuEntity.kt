@@ -17,15 +17,13 @@ class MenuEntity(
 
     @ManyToOne
     @JoinColumn(name = "provider_id")
-    val provider: ProviderEntity?
+    val provider: ProviderEntity?,
 
-
-) {
+    ) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID = UUID.randomUUID()
-
 
 
     @ManyToMany
@@ -36,5 +34,5 @@ class MenuEntity(
     )
     val dishes: MutableList<DishEntity> = mutableListOf()
 
-    constructor(): this(title="", provider = null)
+    constructor() : this(title = "", provider = null)
 }

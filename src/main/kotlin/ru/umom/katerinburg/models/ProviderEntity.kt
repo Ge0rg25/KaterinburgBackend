@@ -38,7 +38,13 @@ class ProviderEntity(
     @OneToMany(mappedBy = "provider")
     val orders : MutableList<OrderEntity> = mutableListOf()
 
-
+    @OneToMany
+    @JoinTable(
+        name = "providers_news",
+        joinColumns = [JoinColumn(name = "provider_id")],
+        inverseJoinColumns = [JoinColumn(name = "news_id")]
+    )
+    val news: MutableList<NewsEntity> = mutableListOf()
 
     constructor(): this(title="", description=null, photoId=null, organization=null)
 }

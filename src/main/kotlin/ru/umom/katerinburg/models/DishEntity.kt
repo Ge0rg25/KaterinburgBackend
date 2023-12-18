@@ -49,8 +49,8 @@ class DishEntity(
     @ManyToMany(mappedBy = "dishes")
     val categories: MutableList<CategoryEntity> = mutableListOf()
 
-//    @ManyToMany(mappedBy = "dishes")
-//    val menus: MutableList<MenuEntity> = mutableListOf()
+    @ManyToMany(mappedBy = "dishes")
+    val menus: MutableList<MenuEntity> = mutableListOf()
 
     constructor(): this(title="", calories = 0.0, proteins = 0.0, fats = 0.0, carbohydrates = 0.0, price = 0.0)
 

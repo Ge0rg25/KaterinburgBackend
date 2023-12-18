@@ -2,6 +2,7 @@ package ru.umom.katerinburg.services.interfaces
 
 import ru.umom.katerinburg.dto.CreateNewsRq
 import ru.umom.katerinburg.dto.NewsDtoRs
+import java.util.UUID
 
 interface NewsService {
 
@@ -9,6 +10,6 @@ interface NewsService {
     fun create(dto: CreateNewsRq)
 
 
-    fun getAll(): List<NewsDtoRs>
+    fun get(providerId: UUID): List<NewsDtoRs>
 
 }

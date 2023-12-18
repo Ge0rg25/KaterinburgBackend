@@ -7,6 +7,7 @@ data class CreateNewsRq(
     val title: String,
     val body: String,
     val photoId: UUID?,
+    val providerId: UUID
 )
 
 

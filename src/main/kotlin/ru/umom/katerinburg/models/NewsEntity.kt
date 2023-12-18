@@ -15,7 +15,8 @@ class NewsEntity(
     val body: String,
 
     @Column
-    val photoId: UUID? = null
+    val photoId: UUID? = null,
+
 
 ) {
     @Id
