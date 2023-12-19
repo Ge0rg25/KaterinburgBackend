@@ -6,14 +6,14 @@ import java.util.*
 @Table(name = "Lockers")
 @Entity
 class LockerEntity(
-    val lockerNumber: Short
+    val lockerNumber: Short,
+    val floor: Short,
 ) {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID = UUID.randomUUID()
 
-    val isLocked: Boolean = false
+    var isLocked: Boolean = false
 
-    constructor(): this(lockerNumber=0)
+    constructor(): this(lockerNumber=0, floor=0)
 }

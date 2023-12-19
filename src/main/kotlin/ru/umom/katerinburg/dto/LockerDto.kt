@@ -3,8 +3,15 @@ package ru.umom.katerinburg.dto
 import java.util.UUID
 
 
-class CreateLockerRq(
+data class RegisterLockerRq(
+    val lockerNumber: Short,
+    val floor: Short
+)
 
-    val lockerId: UUID
 
+data class LockerDtoRs (
+    val id: UUID,
+    val lockerNumber: Short,
+    val floor: Short,
+    val isLocked: Boolean
 )

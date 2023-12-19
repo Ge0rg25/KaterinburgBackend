@@ -13,7 +13,6 @@ class WorkstationEntity(
 ) {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID = UUID.randomUUID()
 
     constructor(): this(userId=UUID.randomUUID(), placeNumber=0)

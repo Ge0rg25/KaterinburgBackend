@@ -20,7 +20,6 @@ class NewsEntity(
 
 ) {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID = UUID.randomUUID()
 
     constructor(): this(title="", body="")

@@ -43,7 +43,6 @@ class DishEntity(
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID = UUID.randomUUID()
 
     @ManyToMany(mappedBy = "dishes")

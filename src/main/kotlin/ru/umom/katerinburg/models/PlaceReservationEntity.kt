@@ -11,7 +11,6 @@ class PlaceReservationEntity(
     val number: Int,
 ) {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID = UUID.randomUUID()
 
     constructor() : this(number = 0)

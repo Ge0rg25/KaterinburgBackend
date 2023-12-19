@@ -32,7 +32,6 @@ val provider: ProviderEntity? = null
 ) {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID = UUID.randomUUID()
 
     var isCompleted: Boolean = false
