@@ -3,8 +3,10 @@ package ru.umom.katerinburg.services.impl
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import ru.umom.katerinburg.dto.LockerDtoRs
 import ru.umom.katerinburg.dto.RegisterLockerRq
 import ru.umom.katerinburg.errors.common.NotFoundError
+import ru.umom.katerinburg.mappers.toDto
 import ru.umom.katerinburg.mappers.toEntity
 import ru.umom.katerinburg.repositories.LockerRepository
 import ru.umom.katerinburg.repositories.findByFloorOrNull
@@ -23,17 +25,17 @@ class LockerServiceImpl(private val lockerRepository: LockerRepository) : Locker
     }
 
     @Transactional
-    override fun reserve(floor: Short) {
-        lockerRepository.findByFloorOrNull(floor)?.apply {
+    override fun reserve(floor: Short): LockerDtoRs {
+        return lockerRepository.findByFloorOrNull(floor)?.apply {
             isLocked = true
-        } ?: throw NotFoundError("Not locker found on floor $floor")
+        }?.toDto() ?: throw NotFoundError("Not locker found on floor $floor")
 
     }
 
     override fun unreserve(lockerNumber: Short) {
         lockerRepository.findByLockerNumberOrNull(lockerNumber)?.apply {
             isLocked = false
-        }?: throw NotFoundError("Locker not found")
+        } ?: throw NotFoundError("Locker not found")
     }
 
 }
