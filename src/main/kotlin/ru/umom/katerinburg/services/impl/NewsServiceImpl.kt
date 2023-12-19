@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.umom.katerinburg.dto.CreateNewsRq
 import ru.umom.katerinburg.dto.NewsDtoRs
-import ru.umom.katerinburg.errors.common.ProviderNotExistsError
+import ru.umom.katerinburg.errors.common.NotFoundError
 import ru.umom.katerinburg.mappers.toDto
 import ru.umom.katerinburg.mappers.toEntity
 import ru.umom.katerinburg.repositories.ProviderRepository
@@ -19,12 +19,12 @@ class NewsServiceImpl(private val providerRepository: ProviderRepository) : News
     override fun create(dto: CreateNewsRq) {
         providerRepository.findByIdOrNull(dto.providerId)?.apply {
             news.add(dto.toEntity())
-        } ?: throw ProviderNotExistsError()
+        } ?: throw NotFoundError("News not found")
     }
 
     override fun get(providerId: UUID): List<NewsDtoRs> = providerRepository.findByIdOrNull(providerId)?.let {
         it.news.map { news -> news.toDto() }
-    } ?: throw ProviderNotExistsError()
+    } ?: throw NotFoundError("News not found")
 
 
 }

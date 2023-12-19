@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.umom.katerinburg.dto.CreateOrderRq
 import ru.umom.katerinburg.dto.OrderDtoRs
-import ru.umom.katerinburg.errors.common.OrderNotExistsError
+import ru.umom.katerinburg.errors.common.NotFoundError
 import ru.umom.katerinburg.mappers.toDto
 import ru.umom.katerinburg.mappers.toEntity
 import ru.umom.katerinburg.repositories.DishRepository
@@ -31,7 +31,7 @@ class OrderServiceImpl(
     override fun complete(id: UUID) {
         orderRepository.findByIdOrNull(id)?.apply {
             isCompleted = true
-        } ?: throw OrderNotExistsError()
+        } ?: throw NotFoundError("Order not found")
 
     }
 

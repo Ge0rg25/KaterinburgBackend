@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional
 import ru.umom.katerinburg.dto.CreateProviderRq
 import ru.umom.katerinburg.dto.ProviderDtoRs
 import ru.umom.katerinburg.dto.UpdateProviderRq
-import ru.umom.katerinburg.errors.common.ProviderNotExistsError
+import ru.umom.katerinburg.errors.common.NotFoundError
 import ru.umom.katerinburg.mappers.toDto
 import ru.umom.katerinburg.mappers.toEntity
 import ru.umom.katerinburg.repositories.OrganizationRepository
@@ -33,13 +33,13 @@ class ProviderServiceImpl(
             title = dto.title
             description = dto.description
             photoId = dto.photoId
-        }?: throw ProviderNotExistsError()
+        }?: throw NotFoundError("Provider not found")
     }
 
     override fun delete(id: UUID) {
         providerRepository.findByIdOrNull(id)?.let {
             providerRepository.delete(it)
-        } ?: ProviderNotExistsError()
+        } ?: NotFoundError("Provider not found")
     }
 
     override fun getAllByOrganizationId(organizationId: UUID): List<ProviderDtoRs> =

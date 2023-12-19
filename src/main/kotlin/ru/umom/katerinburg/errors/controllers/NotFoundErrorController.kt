@@ -4,15 +4,15 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
-import ru.umom.katerinburg.errors.common.ProviderNotExistsError
+import ru.umom.katerinburg.errors.common.NotFoundError
 import ru.umom.katerinburg.utils.genereateErrorResponse
 
 @RestControllerAdvice
-class ProviderErrorController {
+class NotFoundErrorController {
 
-
-
-    @ExceptionHandler(ProviderNotExistsError::class)
-    fun onNotExists(): ResponseEntity<*> = genereateErrorResponse("Provider not exists", HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundError::class)
+    fun onNotFound(error: NotFoundError): ResponseEntity<*>{
+        return genereateErrorResponse(error.message, HttpStatus.NOT_FOUND)
+    }
 
 }

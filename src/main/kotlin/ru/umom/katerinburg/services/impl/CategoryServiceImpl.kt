@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional
 import ru.umom.katerinburg.dto.CategoryDtoRs
 import ru.umom.katerinburg.dto.CreateCategoryRq
 import ru.umom.katerinburg.dto.UpdateCategoryRq
-import ru.umom.katerinburg.errors.common.CategoryNotExistsError
+import ru.umom.katerinburg.errors.common.NotFoundError
 import ru.umom.katerinburg.mappers.toDto
 import ru.umom.katerinburg.mappers.toEntity
 import ru.umom.katerinburg.repositories.CategoryRepository
@@ -33,14 +33,14 @@ class CategoryServiceImpl(
             title = dto.title
             description = dto.description
             photoId = dto.photoId
-        } ?: throw CategoryNotExistsError()
+        } ?: throw NotFoundError("Category not found")
     }
 
     @Transactional
     override fun delete(id: UUID) {
         categoryRepository.findByIdOrNull(id)?.let {
             categoryRepository.delete(it)
-        } ?: throw CategoryNotExistsError()
+        } ?: throw NotFoundError("Category not found")
     }
 
 

@@ -3,7 +3,7 @@ package ru.umom.katerinburg.mappers
 import org.springframework.data.repository.findByIdOrNull
 import ru.umom.katerinburg.dto.CategoryDtoRs
 import ru.umom.katerinburg.dto.CreateCategoryRq
-import ru.umom.katerinburg.errors.common.CategoryNotExistsError
+import ru.umom.katerinburg.errors.common.NotFoundError
 import ru.umom.katerinburg.models.CategoryEntity
 import ru.umom.katerinburg.repositories.ProviderRepository
 
@@ -12,7 +12,7 @@ fun CreateCategoryRq.toEntity(providerRepository: ProviderRepository): CategoryE
     title = title,
     description = description,
     photoId = photoId,
-    provider = providerRepository.findByIdOrNull(providerId)?: throw CategoryNotExistsError()
+    provider = providerRepository.findByIdOrNull(providerId)?: throw NotFoundError("Category not found")
 )
 
 

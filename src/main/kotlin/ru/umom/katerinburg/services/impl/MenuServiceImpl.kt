@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional
 import ru.umom.katerinburg.dto.CreateMenuRq
 import ru.umom.katerinburg.dto.MenuDtoRs
 import ru.umom.katerinburg.dto.UpdateMenuRq
-import ru.umom.katerinburg.errors.common.MenuNotExistsError
+import ru.umom.katerinburg.errors.common.NotFoundError
 import ru.umom.katerinburg.mappers.toDto
 import ru.umom.katerinburg.mappers.toEntity
 import ru.umom.katerinburg.repositories.MenuRepository
@@ -31,14 +31,14 @@ class MenuServiceImpl(private val menuRepository: MenuRepository, private val pr
             title = dto.title
             description = dto.description
             photoId = dto.photoId
-        } ?: throw MenuNotExistsError()
+        } ?: throw NotFoundError("Menu not found")
     }
 
     @Transactional
     override fun delete(id: UUID) {
         menuRepository.findByIdOrNull(id)?.let {
             menuRepository.delete(it)
-        } ?: throw MenuNotExistsError()
+        } ?: throw NotFoundError("Menu not found")
 
     }
 
